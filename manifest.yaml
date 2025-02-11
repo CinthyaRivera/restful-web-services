@@ -1,0 +1,8 @@
+applications:
+- name: restful-web-services
+  memory: 1024M
+  buildpack: java_buildpack_offline
+  random-route: false
+  path: /target/restful-web-services-1.0-SNAPSHOT.jar
+  env:
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
