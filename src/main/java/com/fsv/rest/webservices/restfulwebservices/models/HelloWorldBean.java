@@ -5,7 +5,7 @@ public class HelloWorldBean {
     private String message;
 
     public HelloWorldBean(String message) {
-        this.setMessage(message);
+        this.message = message;
     }
 
     public String getMessage() {
@@ -18,7 +18,6 @@ public class HelloWorldBean {
 
     @Override
     public String toString() {
-        return "HelloWorldBean [" + message + "]";
+        return "HelloWorldBean [message=" + message + "]";
     }
-
 }
