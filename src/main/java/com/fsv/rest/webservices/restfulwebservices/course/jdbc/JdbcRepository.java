@@ -1,12 +1,13 @@
-package com.fsv.rest.webservices.restfulwebservices.course;
+package com.fsv.rest.webservices.restfulwebservices.course.jdbc;
 
+import com.fsv.rest.webservices.restfulwebservices.course.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CourseJdbcRepository {
+public class JdbcRepository {
 
     private static String INSERT_QUERY =
             """

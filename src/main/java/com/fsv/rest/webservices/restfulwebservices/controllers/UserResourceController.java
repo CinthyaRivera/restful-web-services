@@ -6,7 +6,6 @@ import com.fsv.rest.webservices.restfulwebservices.models.User;
 import com.fsv.rest.webservices.restfulwebservices.services.UserDaoService;
 import jakarta.validation.Valid;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.ArrayList;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 

@@ -1,23 +1,35 @@
 package com.fsv.rest.webservices.restfulwebservices.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity(name = "user_details")
 public class User {
 
-    @Size(min = 3, max = 100, message = "Name between 2 and 100 chars")
+    @Id
+    @GeneratedValue
     private Integer id;
 
-
-    @JsonProperty("user_name")
+    //@JsonProperty("user_name")
+    @Size(min = 3, max = 100, message = "Name between 2 and 100 chars")
     private String name;
 
     @Past(message = "Date must be in a past date")
-    @JsonProperty("birth_date")
+    //@JsonProperty("birth_date")
     private LocalDate birthDate;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> posts;
+
+    protected User() {
+
+    }
 
     public User(Integer id, String name, LocalDate birthDate) {
         super();
@@ -48,6 +60,14 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
