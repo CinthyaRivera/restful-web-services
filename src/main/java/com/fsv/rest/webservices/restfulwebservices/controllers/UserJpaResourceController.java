@@ -23,27 +23,27 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class UserJpaResourceController {
 
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     private PostRepository postRepository;
 
-    public UserJpaResourceController(UserRepository repository, PostRepository postRepository) {
+    public UserJpaResourceController(UserRepository userRepository, PostRepository postRepository) {
 
-        this.repository = repository;
+        this.userRepository = userRepository;
         this.postRepository = postRepository;
     }
 
     @GetMapping("/jpa/v1/users")
     public List<User> retrieveAllUsers() {
 
-        return repository.findAll();
+        return userRepository.findAll();
 
     }
 
     @GetMapping("/jpa/v1/users/{id}")
     public EntityModel<User> retrieveUser(@PathVariable int id) {
 
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
 
@@ -77,13 +77,13 @@ public class UserJpaResourceController {
     @DeleteMapping("/jpa/v1/users/{id}")
     public void deleteUser(@PathVariable int id) {
 
-        repository.deleteById(id);
+        userRepository.deleteById(id);
 
     }
 
     @PostMapping("/jpa/v1/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User savedUser = repository.save(user);
+        User savedUser = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 
@@ -94,7 +94,7 @@ public class UserJpaResourceController {
     @GetMapping("/jpa/v1/users/{id}/posts")
     public List<Post> retrievePostsForUser(@PathVariable int id) {
 
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
 
@@ -111,7 +111,7 @@ public class UserJpaResourceController {
     @GetMapping("/jpa/v1/users/{id}/posts/{postId}")
     public EntityModel<Post> retrieveUserPost(@PathVariable int id, @PathVariable int postId) {
 
-        Optional<User> userOptional = repository.findById(id);
+        Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty()) {
 
@@ -141,7 +141,7 @@ public class UserJpaResourceController {
     @PostMapping("/jpa/v1/users/{id}/posts")
     public ResponseEntity<Object> createPostForUser(@PathVariable int id, @Valid @RequestBody Post post) {
 
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
 
@@ -168,7 +168,7 @@ public class UserJpaResourceController {
     @DeleteMapping("/jpa/v1/users/{id}/posts/{postId}")
     public void deleteUserPost(@PathVariable int id, @PathVariable int postId) {
 
-        Optional<User> userOptional = repository.findById(id);
+        Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty()) {
 
@@ -184,7 +184,7 @@ public class UserJpaResourceController {
         }
 
         postRepository.delete(foundPost);
-        
+
     }
 
 }
